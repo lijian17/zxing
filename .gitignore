@@ -2,3 +2,9 @@ target
 private
 .idea
 *.iml
+
+/demo/BarcodeScanner/bin
+/demo/BarcodeScanner/gen
+
+/android/bin
+/android/gen
