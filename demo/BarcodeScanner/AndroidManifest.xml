@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- Copyright (C) 2008 ZXing authors
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.google.zxing.client.android"
           android:versionName="4.7.6"
@@ -25,7 +10,7 @@
   <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.FLASHLIGHT"/>
   <uses-permission android:name="android.permission.READ_CONTACTS"/>
-  <!-- unavailable in API 23 -->
+  <!-- API 23中无法使用 -->
   <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
@@ -33,18 +18,18 @@
 
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="22"/>
 
-  <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+  <!-- 不需要相机，因为这需要后置摄像头。 这允许它在Nexus 7上工作 -->
   <uses-feature android:name="android.hardware.camera" android:required="false"/>
   <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
-  <!-- TODO replace above two with next line after Android 4.2 -->
+  <!-- TODO 在Android 4.2之后用下一行替换上面两个 -->
   <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
   <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
   <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
   <uses-feature android:name="android.hardware.screen.landscape"/>
   <uses-feature android:name="android.hardware.wifi" android:required="false"/>
-  <!-- This excludes Google TV, which is unfortunately included by virtue of not requiring a camera -->
+  <!-- 这不包括由于不需要相机而不幸被包含在内的Google TV -->
   <uses-feature android:name="android.hardware.touchscreen"/>
-  <!-- TODO make this not required again after android.hardware.camera.any is available -->
+  <!-- TODO 使android.hardware.camera.any可用后再也不需要 -->
 
   <supports-screens android:xlargeScreens="true"
                     android:largeScreens="true"
@@ -70,28 +55,28 @@
         <action android:name="com.google.zxing.client.android.SCAN"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
-      <!-- Allow web apps to launch Barcode Scanner by linking to http://zxing.appspot.com/scan. -->
+      <!-- 通过链接到http://zxing.appspot.com/scan，允许网络应用程序启动条码扫描器。 -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="http" android:host="zxing.appspot.com" android:path="/scan"/>
       </intent-filter>
-      <!-- We also support a Google Product Search URL. -->
+      <!-- 我们还支持Google产品搜索URL。 -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="http" android:host="www.google.com" android:path="/m/products/scan"/>
       </intent-filter>
-      <!-- And the UK version. -->
+      <!-- 和英国版。 -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="http" android:host="www.google.co.uk" android:path="/m/products/scan"/>
       </intent-filter>
-      <!-- Support zxing://scan/?... like iPhone app -->
+      <!-- 支持 zxing://scan/?... 像 iPhone app -->
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
@@ -108,13 +93,13 @@
         <action android:name="com.google.zxing.client.android.ENCODE"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
-      <!-- This allows us to handle the Share button in Contacts. -->
+      <!-- 这允许我们处理联系人中的共享按钮。 -->
       <intent-filter>
         <action android:name="android.intent.action.SEND"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <data android:mimeType="text/x-vcard"/>
       </intent-filter>
-      <!-- This allows us to handle sharing any plain text . -->
+      <!-- 这允许我们处理共享任何纯文本。 -->
       <intent-filter>
         <action android:name="android.intent.action.SEND"/>
         <category android:name="android.intent.category.DEFAULT"/>
