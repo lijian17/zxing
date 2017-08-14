@@ -73,15 +73,12 @@ import java.util.EnumSet;
 import java.util.Map;
 
 /**
- * This activity opens the camera and does the actual scanning on a background thread. It draws a
- * viewfinder to help the user place the barcode correctly, shows feedback as the image processing
- * is happening, and then overlays the results when a scan is successful.
+ * 这个activity打开相机，并在后台线程上进行实际扫描。 它绘制取景器以帮助用户正确放置条形码，在图像处理正在发生时显示反馈，然后在扫描成功时覆盖结果。
  *
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
-
   private static final String TAG = CaptureActivity.class.getSimpleName();
 
   private static final long DEFAULT_INTENT_RESULT_DURATION_MS = 1500L;
@@ -91,6 +88,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
   private static final int HISTORY_REQUEST_CODE = 0x0000bacc;
 
+  /** EnumSet.of创建指定类型指定初始数据的集合 */
   private static final Collection<ResultMetadataType> DISPLAYABLE_METADATA_TYPES =
       EnumSet.of(ResultMetadataType.ISSUE_NUMBER,
                  ResultMetadataType.SUGGESTED_PRICE,
@@ -104,6 +102,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private TextView statusView;
   private View resultView;
   private Result lastResult;
+  /** 标记是否有Surface */
   private boolean hasSurface;
   private boolean copyToClipboard;
   private IntentSource source;
@@ -133,8 +132,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
 
+    // 设置保持屏幕常量
     Window window = getWindow();
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    
     setContentView(R.layout.capture);
 
     hasSurface = false;

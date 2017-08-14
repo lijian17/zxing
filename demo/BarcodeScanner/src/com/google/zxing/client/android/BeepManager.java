@@ -31,13 +31,17 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * Manages beeps and vibrations for {@link CaptureActivity}.
+ * 管理声音和震动{@link CaptureActivity}.
+ * 
+ * @author lijian
+ * @date 2017-8-14 下午11:15:24
  */
 final class BeepManager implements MediaPlayer.OnErrorListener, Closeable {
-
   private static final String TAG = BeepManager.class.getSimpleName();
 
+  /** 音量 */
   private static final float BEEP_VOLUME = 0.10f;
+  /** 震动时长 */
   private static final long VIBRATE_DURATION = 200L;
 
   private final Activity activity;
@@ -56,13 +60,15 @@ final class BeepManager implements MediaPlayer.OnErrorListener, Closeable {
     playBeep = shouldBeep(prefs, activity);
     vibrate = prefs.getBoolean(PreferencesActivity.KEY_VIBRATE, false);
     if (playBeep && mediaPlayer == null) {
-      // The volume on STREAM_SYSTEM is not adjustable, and users found it too loud,
-      // so we now play on the music stream.
+      // 在STREAM_SYSTEM音量不可调，并且用户觉得太大声，所以我们现在的音乐流播放。
       activity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
       mediaPlayer = buildMediaPlayer(activity);
     }
   }
 
+  /**
+   * 播放beep声和震动
+   */
   synchronized void playBeepSoundAndVibrate() {
     if (playBeep && mediaPlayer != null) {
       mediaPlayer.start();
@@ -73,10 +79,16 @@ final class BeepManager implements MediaPlayer.OnErrorListener, Closeable {
     }
   }
 
+  /**
+   * 是否应该播放beep声
+   * @param prefs
+   * @param activity
+   * @return
+   */
   private static boolean shouldBeep(SharedPreferences prefs, Context activity) {
     boolean shouldPlayBeep = prefs.getBoolean(PreferencesActivity.KEY_PLAY_BEEP, true);
     if (shouldPlayBeep) {
-      // See if sound settings overrides this
+      // 看看声音设置是否覆盖此
       AudioManager audioService = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
       if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
         shouldPlayBeep = false;
@@ -85,6 +97,11 @@ final class BeepManager implements MediaPlayer.OnErrorListener, Closeable {
     return shouldPlayBeep;
   }
 
+  /**
+   * 构建一个MediaPlayer
+   * @param activity
+   * @return
+   */
   private MediaPlayer buildMediaPlayer(Context activity) {
     MediaPlayer mediaPlayer = new MediaPlayer();
     try {

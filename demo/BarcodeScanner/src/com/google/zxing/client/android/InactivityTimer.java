@@ -26,12 +26,13 @@ import android.os.BatteryManager;
 import android.util.Log;
 
 /**
- * Finishes an activity after a period of inactivity if the device is on battery power.
+ * 闲置计时器<br>
+ * 如果设备处于电池供电状态，请在一段时间不活动后完成活动。
  */
 final class InactivityTimer {
-
   private static final String TAG = InactivityTimer.class.getSimpleName();
 
+  /** 闲置计数时间（5分钟后执行） */
   private static final long INACTIVITY_DELAY_MS = 5 * 60 * 1000L;
 
   private final Activity activity;
@@ -46,12 +47,18 @@ final class InactivityTimer {
     onActivity();
   }
 
+  /**
+   * 活动状态（创建后台监听线程并运行）
+   */
   synchronized void onActivity() {
     cancel();
     inactivityTask = new InactivityAsyncTask();
     inactivityTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
   }
 
+  /**
+   * 失去焦点，注销电池监听器
+   */
   synchronized void onPause() {
     cancel();
     if (registered) {
@@ -62,6 +69,9 @@ final class InactivityTimer {
     }
   }
 
+  /**
+   * 获得焦点时，注册电池监听器
+   */
   synchronized void onResume() {
     if (registered) {
       Log.w(TAG, "PowerStatusReceiver was already registered?");
@@ -72,6 +82,9 @@ final class InactivityTimer {
     onActivity();
   }
 
+  /**
+   * 关闭并销毁计数器线程
+   */
   private synchronized void cancel() {
     AsyncTask<?,?,?> task = inactivityTask;
     if (task != null) {
@@ -80,15 +93,24 @@ final class InactivityTimer {
     }
   }
 
+  /**
+   * 关闭
+   */
   void shutdown() {
     cancel();
   }
 
+  /**
+   * 电源状态接收器
+   * 
+   * @author lijian
+   * @date 2017-8-14 下午10:51:54
+   */
   private final class PowerStatusReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
       if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
-        // 0 indicates that we're on battery
+        // 0表示我们正在使用电池
         boolean onBatteryNow = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) <= 0;
         if (onBatteryNow) {
           InactivityTimer.this.onActivity();

@@ -20,10 +20,10 @@ import android.app.Activity;
 import android.os.Bundle;
 
 /**
- * The main settings activity.
- *
- * @author dswitkin@google.com (Daniel Switkin)
- * @author Sean Owen
+ * 主设置activity.
+ * 
+ * @author lijian
+ * @date 2017-8-14 下午11:23:20
  */
 public final class PreferencesActivity extends Activity {
 
@@ -36,7 +36,9 @@ public final class PreferencesActivity extends Activity {
 
   public static final String KEY_CUSTOM_PRODUCT_SEARCH = "preferences_custom_product_search";
 
+  /** beep声本地存储键 */
   public static final String KEY_PLAY_BEEP = "preferences_play_beep";
+  /** 震动本地存储键 */
   public static final String KEY_VIBRATE = "preferences_vibrate";
   public static final String KEY_COPY_TO_CLIPBOARD = "preferences_copy_to_clipboard";
   public static final String KEY_FRONT_LIGHT_MODE = "preferences_front_light_mode";
