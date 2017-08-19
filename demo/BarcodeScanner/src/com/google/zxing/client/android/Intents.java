@@ -1,24 +1,7 @@
-/*
- * Copyright (C) 2008 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android;
 
 /**
- * This class provides the constants to use when sending an Intent to Barcode Scanner.
- * These strings are effectively API and cannot be changed.
+ * 该类提供了在将条目扫描程序发送到Intent时使用的常量。 这些字符串是有效的API，无法更改。
  *
  * @author dswitkin@google.com (Daniel Switkin)
  */
@@ -27,12 +10,11 @@ public final class Intents {
   }
 
   /**
-   * Constants related to the {@link Scan#ACTION} Intent.
+   * 与 {@link Scan#ACTION} Intent相关的常量.
    */
   public static final class Scan {
     /**
-     * Send this intent to open the Barcodes app in scanning mode, find a barcode, and return
-     * the results.
+     * 发送此意图以扫描模式打开条形码应用程序，查找条形码并返回结果。
      */
     public static final String ACTION = "com.google.zxing.client.android.SCAN";
 
@@ -169,7 +151,7 @@ public final class Intents {
     public static final String RESULT_BYTE_SEGMENTS_PREFIX = "SCAN_RESULT_BYTE_SEGMENTS_";
 
     /**
-     * Setting this to false will not save scanned codes in the history. Specified as a {@code boolean}.
+     * 将此设置为false将不会将扫描的代码保存在历史记录中. Specified as a {@code boolean}.
      */
     public static final String SAVE_HISTORY = "SAVE_HISTORY";
 

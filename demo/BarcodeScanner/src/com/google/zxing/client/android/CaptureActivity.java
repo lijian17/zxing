@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2008 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android;
 
 import com.google.zxing.BarcodeFormat;
@@ -74,9 +58,9 @@ import java.util.Map;
 
 /**
  * 这个activity打开相机，并在后台线程上进行实际扫描。 它绘制取景器以帮助用户正确放置条形码，在图像处理正在发生时显示反馈，然后在扫描成功时覆盖结果。
- *
- * @author dswitkin@google.com (Daniel Switkin)
- * @author Sean Owen
+ * 
+ * @author lijian
+ * @date 2017-8-16 下午3:34:28
  */
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
   private static final String TAG = CaptureActivity.class.getSimpleName();

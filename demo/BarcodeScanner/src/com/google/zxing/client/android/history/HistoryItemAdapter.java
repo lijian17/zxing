@@ -1,19 +1,3 @@
-/*
- * Copyright 2012 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android.history;
 
 import android.content.Context;
@@ -29,43 +13,51 @@ import com.google.zxing.client.android.R;
 
 import java.util.ArrayList;
 
+/**
+ * 历史条目适配器
+ * 
+ * @author lijian
+ * @date 2017-8-16 下午5:13:47
+ */
 final class HistoryItemAdapter extends ArrayAdapter<HistoryItem> {
 
-  private final Context activity;
+	private final Context activity;
 
-  HistoryItemAdapter(Context activity) {
-    super(activity, R.layout.history_list_item, new ArrayList<HistoryItem>());
-    this.activity = activity;
-  }
+	HistoryItemAdapter(Context activity) {
+		super(activity, R.layout.history_list_item,
+				new ArrayList<HistoryItem>());
+		this.activity = activity;
+	}
 
-  @Override
-  public View getView(int position, View view, ViewGroup viewGroup) {
-    View layout;
-    if (view instanceof LinearLayout) {
-      layout = view;
-    } else {
-      LayoutInflater factory = LayoutInflater.from(activity);
-      layout = factory.inflate(R.layout.history_list_item, viewGroup, false);
-    }
+	@Override
+	public View getView(int position, View view, ViewGroup viewGroup) {
+		View layout;
+		if (view instanceof LinearLayout) {
+			layout = view;
+		} else {
+			LayoutInflater factory = LayoutInflater.from(activity);
+			layout = factory.inflate(R.layout.history_list_item, viewGroup,
+					false);
+		}
 
-    HistoryItem item = getItem(position);
-    Result result = item.getResult();
+		HistoryItem item = getItem(position);
+		Result result = item.getResult();
 
-    CharSequence title;
-    CharSequence detail;
-    if (result != null) {
-      title = result.getText();
-      detail = item.getDisplayAndDetails();      
-    } else {
-      Resources resources = getContext().getResources();
-      title = resources.getString(R.string.history_empty);
-      detail = resources.getString(R.string.history_empty_detail);
-    }
+		CharSequence title;
+		CharSequence detail;
+		if (result != null) {
+			title = result.getText();
+			detail = item.getDisplayAndDetails();
+		} else {
+			Resources resources = getContext().getResources();
+			title = resources.getString(R.string.history_empty);
+			detail = resources.getString(R.string.history_empty_detail);
+		}
 
-    ((TextView) layout.findViewById(R.id.history_title)).setText(title);    
-    ((TextView) layout.findViewById(R.id.history_detail)).setText(detail);
+		((TextView) layout.findViewById(R.id.history_title)).setText(title);
+		((TextView) layout.findViewById(R.id.history_detail)).setText(detail);
 
-    return layout;
-  }
+		return layout;
+	}
 
 }

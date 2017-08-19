@@ -147,7 +147,7 @@ public abstract class ResultHandler {
   }
 
   /**
-   * Create a possibly styled string for the contents of the current barcode.
+   * 为当前条形码的内容创建一个可能风格的字符串。
    *
    * @return The text to be displayed.
    */

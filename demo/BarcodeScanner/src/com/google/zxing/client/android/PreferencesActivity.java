@@ -36,14 +36,17 @@ public final class PreferencesActivity extends Activity {
 
   public static final String KEY_CUSTOM_PRODUCT_SEARCH = "preferences_custom_product_search";
 
-  /** beep声本地存储键 */
+  /** beep声 */
   public static final String KEY_PLAY_BEEP = "preferences_play_beep";
-  /** 震动本地存储键 */
+  /** 震动 */
   public static final String KEY_VIBRATE = "preferences_vibrate";
   public static final String KEY_COPY_TO_CLIPBOARD = "preferences_copy_to_clipboard";
+  /** 前灯模式 */
   public static final String KEY_FRONT_LIGHT_MODE = "preferences_front_light_mode";
   public static final String KEY_BULK_MODE = "preferences_bulk_mode";
+  /** 记得重复 */
   public static final String KEY_REMEMBER_DUPLICATES = "preferences_remember_duplicates";
+  /** 历史记录 */
   public static final String KEY_ENABLE_HISTORY = "preferences_history";
   public static final String KEY_SUPPLEMENTAL = "preferences_supplemental";
   public static final String KEY_AUTO_FOCUS = "preferences_auto_focus";
