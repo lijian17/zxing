@@ -96,8 +96,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private Map<DecodeHintType,?> decodeHints;
   private String characterSet;
   private HistoryManager historyManager;
+  /** 闲置计时器 */
   private InactivityTimer inactivityTimer;
+  /** 管理声音和震动 */
   private BeepManager beepManager;
+  /** 检测环境光 */
   private AmbientLightManager ambientLightManager;
 
   ViewfinderView getViewfinderView() {

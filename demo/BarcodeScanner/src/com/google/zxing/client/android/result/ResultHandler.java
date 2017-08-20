@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2008 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android.result;
 
 import com.google.zxing.Result;
@@ -44,6 +28,9 @@ import java.util.Locale;
 import java.util.ArrayList;
 
 /**
+ * Android专用条形码处理程序的基础类。 这些允许应用程序多态地为每种数据类型建议适当的操作。 
+ * 此类还包含一些实用方法来执行常见操作，如打开URL。 它们可以很容易地被移动到辅助对象中，但它不能是静态的，因为Activity实例需要启动一个意图。
+ * 
  * A base class for the Android-specific barcode handlers. These allow the app to polymorphically
  * suggest the appropriate actions for each data type.
  *
@@ -55,7 +42,6 @@ import java.util.ArrayList;
  * @author Sean Owen
  */
 public abstract class ResultHandler {
-
   private static final String TAG = ResultHandler.class.getSimpleName();
 
   private static final String[] EMAIL_TYPE_STRINGS = {"home", "work", "mobile"};

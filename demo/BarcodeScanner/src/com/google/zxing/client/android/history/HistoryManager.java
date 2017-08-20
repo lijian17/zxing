@@ -270,12 +270,9 @@ public final class HistoryManager {
 				db.delete(DBHelper.TABLE_NAME, DBHelper.ID_COL + '=' + id, null);
 			}
 		} catch (SQLiteException sqle) {
-			// We're seeing an error here when called in
-			// CaptureActivity.onCreate() in rare cases
-			// and don't understand it. First theory is that it's transient so
-			// can be safely ignored.
+			// 在极少数情况下，在CaptureActivity.onCreate（）中调用时，我们看到错误，不明白。 第一个理论是它是短暂的，所以可以安全地忽略。
 			Log.w(TAG, sqle);
-			// continue
+			// 继续
 		} finally {
 			close(cursor, db);
 		}
@@ -283,11 +280,8 @@ public final class HistoryManager {
 
 	/**
 	 * <p>
-	 * Builds a text representation of the scanning history. Each scan is
-	 * encoded on one line, terminated by a line break (\r\n). The values in
-	 * each line are comma-separated, and double-quoted. Double-quotes within
-	 * values are escaped with a sequence of two double-quotes. The fields
-	 * output are:
+	 * 构建扫描历史记录的文本表示。 每个扫描都在一行上编码，以换行符（\r\n）终止。 
+	 * 每一行中的值都以逗号分隔，并加上双引号。 值中的双引号以两个双引号的顺序进行转义。 输出的字段有：
 	 * </p>
 	 * 
 	 * <ol>
@@ -326,16 +320,14 @@ public final class HistoryManager {
 						.append(massageHistoryField(cursor.getString(3)))
 						.append("\",");
 
-				// Add timestamp again, formatted
+				// 再次添加时间戳，格式化
 				long timestamp = cursor.getLong(3);
 				historyText
 						.append('"')
 						.append(massageHistoryField(format.format(new Date(
 								timestamp)))).append("\",");
 
-				// Above we're preserving the old ordering of columns which had
-				// formatted data in position 5
-
+				// 以上我们将保留格式化数据位置5的列的旧排序
 				historyText.append('"')
 						.append(massageHistoryField(cursor.getString(4)))
 						.append("\"\r\n");
@@ -346,6 +338,9 @@ public final class HistoryManager {
 		}
 	}
 
+	/**
+	 * 清除历史
+	 */
 	void clearHistory() {
 		SQLiteOpenHelper helper = new DBHelper(activity);
 		SQLiteDatabase db = null;
@@ -357,6 +352,11 @@ public final class HistoryManager {
 		}
 	}
 
+	/**
+	 * 保存历史
+	 * @param history
+	 * @return
+	 */
 	static Uri saveHistory(String history) {
 		File bsRoot = new File(Environment.getExternalStorageDirectory(),
 				"BarcodeScanner");
