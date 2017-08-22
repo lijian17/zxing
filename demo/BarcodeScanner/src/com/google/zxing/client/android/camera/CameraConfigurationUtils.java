@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2014 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android.camera;
 
 import android.annotation.TargetApi;
@@ -33,32 +17,48 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Utility methods for configuring the Android camera.
- *
- * @author Sean Owen
+ * 配置Android相机的工具类
+ * 
+ * @author lijian-pc
+ * @date 2017-8-22 下午6:09:14
  */
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
 public final class CameraConfigurationUtils {
-
   private static final String TAG = "CameraConfiguration";
 
+  /** 分号 */
   private static final Pattern SEMICOLON = Pattern.compile(";");
 
+  /** 最小预览像素 */
   private static final int MIN_PREVIEW_PIXELS = 480 * 320; // normal screen
+  /** 最大曝光补偿 */
   private static final float MAX_EXPOSURE_COMPENSATION = 1.5f;
+  /** 最小曝光补偿 */
   private static final float MIN_EXPOSURE_COMPENSATION = 0.0f;
+  /** 最大外形失真 */
   private static final double MAX_ASPECT_DISTORTION = 0.15;
+  /** 最小帧频 */
   private static final int MIN_FPS = 10;
+  /** 最大帧频 */
   private static final int MAX_FPS = 20;
+  /** 面积单位 */
   private static final int AREA_PER_1000 = 400;
 
   private CameraConfigurationUtils() {
   }
 
+  /**
+   * 
+   * @param parameters 相机参数
+   * @param autoFocus 是否自动对焦
+   * @param disableContinuous 禁用连续
+   * @param safeMode 安全模式
+   */
   public static void setFocus(Camera.Parameters parameters,
                               boolean autoFocus,
                               boolean disableContinuous,
                               boolean safeMode) {
+	// 支持的对焦模式
     List<String> supportedFocusModes = parameters.getSupportedFocusModes();
     String focusMode = null;
     if (autoFocus) {

@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2010 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android.camera;
 
 import android.content.Context;
@@ -31,17 +15,23 @@ import com.google.zxing.client.android.camera.open.CameraFacing;
 import com.google.zxing.client.android.camera.open.OpenCamera;
 
 /**
- * A class which deals with reading, parsing, and setting the camera parameters which are used to
- * configure the camera hardware.
+ * 相机配置管理器<br>
+ * 处理读取，解析和设置用于配置摄像机硬件的摄像机参数的类。
+ * 
+ * @author lijian-pc
+ * @date 2017-8-22 下午2:36:14
  */
 final class CameraConfigurationManager {
-
   private static final String TAG = "CameraConfiguration";
 
   private final Context context;
+  /** 需要旋转 */
   private int cwNeededRotation;
+  /** 从显示到相机的旋转 */
   private int cwRotationFromDisplayToCamera;
+  /** 屏幕分辨率 */
   private Point screenResolution;
+  /** 相机分辨率 */
   private Point cameraResolution;
   private Point bestPreviewSize;
   private Point previewSizeOnScreen;
@@ -51,13 +41,14 @@ final class CameraConfigurationManager {
   }
 
   /**
-   * Reads, one time, values from the camera that are needed by the app.
+   * 一次性读取相机所需的应用程序的值。
    */
   void initFromCameraParameters(OpenCamera camera) {
     Camera.Parameters parameters = camera.getCamera().getParameters();
     WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     Display display = manager.getDefaultDisplay();
 
+    // 屏幕的旋转角度
     int displayRotation = display.getRotation();
     int cwRotationFromNaturalToDisplay;
     switch (displayRotation) {
@@ -74,7 +65,7 @@ final class CameraConfigurationManager {
         cwRotationFromNaturalToDisplay = 270;
         break;
       default:
-        // Have seen this return incorrect values like -90
+    	// 看到这个返回不正确的值，如-90
         if (displayRotation % 90 == 0) {
           cwRotationFromNaturalToDisplay = (360 + displayRotation) % 360;
         } else {
@@ -83,10 +74,11 @@ final class CameraConfigurationManager {
     }
     Log.i(TAG, "Display at: " + cwRotationFromNaturalToDisplay);
 
+    // 屏幕的方向
     int cwRotationFromNaturalToCamera = camera.getOrientation();
     Log.i(TAG, "Camera at: " + cwRotationFromNaturalToCamera);
 
-    // Still not 100% sure about this. But acts like we need to flip this:
+    // 仍然不能100%肯定这个。 但是我们需要这样做的行为：
     if (camera.getFacing() == CameraFacing.FRONT) {
       cwRotationFromNaturalToCamera = (360 - cwRotationFromNaturalToCamera) % 360;
       Log.i(TAG, "Front camera overriden to: " + cwRotationFromNaturalToCamera);

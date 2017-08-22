@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2008 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android.camera;
 
 import android.content.Context;
@@ -30,19 +14,23 @@ import com.google.zxing.client.android.camera.open.OpenCameraInterface;
 import java.io.IOException;
 
 /**
- * This object wraps the Camera service object and expects to be the only one talking to it. The
- * implementation encapsulates the steps needed to take preview-sized images, which are used for
- * both preview and decoding.
- *
- * @author dswitkin@google.com (Daniel Switkin)
+ * 相机管理器<br>
+ * 该对象包装Camera服务对象，并期望是唯一一个与之对话的对象。
+ * 该实现封装了预览大小的图像所需的步骤，这些图像用于预览和解码。
+ * 
+ * @author lijian-pc
+ * @date 2017-8-22 下午2:15:12
  */
 public final class CameraManager {
-
   private static final String TAG = CameraManager.class.getSimpleName();
 
+  /** 最小帧宽 */
   private static final int MIN_FRAME_WIDTH = 240;
+  /** 最小帧高 */
   private static final int MIN_FRAME_HEIGHT = 240;
+  /** 最大帧宽 */
   private static final int MAX_FRAME_WIDTH = 1200; // = 5/8 * 1920
+  /** 最大帧高 */
   private static final int MAX_FRAME_HEIGHT = 675; // = 5/8 * 1080
 
   private final Context context;

@@ -137,7 +137,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   protected void onResume() {
     super.onResume();
     
-    // historyManager must be initialized here to update the history preference
+    // 必须在此处初始化historyManager才能更新历史记录preference
     historyManager = new HistoryManager(this);
     historyManager.trimHistory();
 
