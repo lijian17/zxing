@@ -45,6 +45,7 @@ final class CameraConfigurationManager {
    */
   void initFromCameraParameters(OpenCamera camera) {
     Camera.Parameters parameters = camera.getCamera().getParameters();
+    // android获得屏幕高度和宽度（display.getSize(Point)）
     WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     Display display = manager.getDefaultDisplay();
 
@@ -72,16 +73,16 @@ final class CameraConfigurationManager {
           throw new IllegalArgumentException("Bad rotation: " + displayRotation);
         }
     }
-    Log.i(TAG, "Display at: " + cwRotationFromNaturalToDisplay);
+    Log.i(TAG, "显示在: " + cwRotationFromNaturalToDisplay);
 
     // 屏幕的方向
     int cwRotationFromNaturalToCamera = camera.getOrientation();
-    Log.i(TAG, "Camera at: " + cwRotationFromNaturalToCamera);
+    Log.i(TAG, "相机在: " + cwRotationFromNaturalToCamera);
 
     // 仍然不能100%肯定这个。 但是我们需要这样做的行为：
     if (camera.getFacing() == CameraFacing.FRONT) {
       cwRotationFromNaturalToCamera = (360 - cwRotationFromNaturalToCamera) % 360;
-      Log.i(TAG, "Front camera overriden to: " + cwRotationFromNaturalToCamera);
+      Log.i(TAG, "前置摄像机覆盖到: " + cwRotationFromNaturalToCamera);
     }
 
     /*
@@ -100,23 +101,24 @@ final class CameraConfigurationManager {
 
     cwRotationFromDisplayToCamera =
         (360 + cwRotationFromNaturalToCamera - cwRotationFromNaturalToDisplay) % 360;
-    Log.i(TAG, "Final display orientation: " + cwRotationFromDisplayToCamera);
+    Log.i(TAG, "最终显示方向: " + cwRotationFromDisplayToCamera);
+    // 如果是正面
     if (camera.getFacing() == CameraFacing.FRONT) {
-      Log.i(TAG, "Compensating rotation for front camera");
+      Log.i(TAG, "补偿前置摄像头的旋转");
       cwNeededRotation = (360 - cwRotationFromDisplayToCamera) % 360;
     } else {
       cwNeededRotation = cwRotationFromDisplayToCamera;
     }
-    Log.i(TAG, "Clockwise rotation from display to camera: " + cwNeededRotation);
+    Log.i(TAG, "从显示器到相机顺时针旋转: " + cwNeededRotation);
 
     Point theScreenResolution = new Point();
     display.getSize(theScreenResolution);
     screenResolution = theScreenResolution;
-    Log.i(TAG, "Screen resolution in current orientation: " + screenResolution);
+    Log.i(TAG, "当前方向的屏幕分辨率: " + screenResolution);
     cameraResolution = CameraConfigurationUtils.findBestPreviewSizeValue(parameters, screenResolution);
-    Log.i(TAG, "Camera resolution: " + cameraResolution);
+    Log.i(TAG, "相机分辨率: " + cameraResolution);
     bestPreviewSize = CameraConfigurationUtils.findBestPreviewSizeValue(parameters, screenResolution);
-    Log.i(TAG, "Best available preview size: " + bestPreviewSize);
+    Log.i(TAG, "最佳可用预览大小: " + bestPreviewSize);
 
     boolean isScreenPortrait = screenResolution.x < screenResolution.y;
     boolean isPreviewSizePortrait = bestPreviewSize.x < bestPreviewSize.y;
