@@ -1,35 +1,33 @@
-/*
- * Copyright (C) 2009 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;
 
+/**
+ * 取景器结果点回调
+ * 
+ * @author lijian
+ * @date 2017-8-27 下午5:51:11
+ */
 final class ViewfinderResultPointCallback implements ResultPointCallback {
 
-  private final ViewfinderView viewfinderView;
+	private final ViewfinderView viewfinderView;
 
-  ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
-    this.viewfinderView = viewfinderView;
-  }
+	/**
+	 * 取景器结果点回调
+	 * 
+	 * @param viewfinderView
+	 *            取景器对象
+	 */
+	ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
+		this.viewfinderView = viewfinderView;
+	}
 
-  @Override
-  public void foundPossibleResultPoint(ResultPoint point) {
-    viewfinderView.addPossibleResultPoint(point);
-  }
+	// 找到可能的结果点
+	@Override
+	public void foundPossibleResultPoint(ResultPoint point) {
+		// 将结果点绘制在取景器上
+		viewfinderView.addPossibleResultPoint(point);
+	}
 
 }
