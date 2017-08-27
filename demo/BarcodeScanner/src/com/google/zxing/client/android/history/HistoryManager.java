@@ -53,6 +53,11 @@ public final class HistoryManager {
 	/** 是否启用历史记录 */
 	private final boolean enableHistory;
 
+	/**
+	 * 管理与扫描历史相关的功能
+	 * 
+	 * @param activity
+	 */
 	public HistoryManager(Activity activity) {
 		this.activity = activity;
 		SharedPreferences prefs = PreferenceManager
@@ -162,6 +167,7 @@ public final class HistoryManager {
 
 	/**
 	 * 添加历史条目
+	 * 
 	 * @param result
 	 * @param handler
 	 */
@@ -201,6 +207,7 @@ public final class HistoryManager {
 
 	/**
 	 * 添加历史条目详情
+	 * 
 	 * @param itemID
 	 * @param itemDetails
 	 */
@@ -270,7 +277,8 @@ public final class HistoryManager {
 				db.delete(DBHelper.TABLE_NAME, DBHelper.ID_COL + '=' + id, null);
 			}
 		} catch (SQLiteException sqle) {
-			// 在极少数情况下，在CaptureActivity.onCreate（）中调用时，我们看到错误，不明白。 第一个理论是它是短暂的，所以可以安全地忽略。
+			// 在极少数情况下，在CaptureActivity.onCreate（）中调用时，我们看到错误，不明白。
+			// 第一个理论是它是短暂的，所以可以安全地忽略。
 			Log.w(TAG, sqle);
 			// 继续
 		} finally {
@@ -280,8 +288,8 @@ public final class HistoryManager {
 
 	/**
 	 * <p>
-	 * 构建扫描历史记录的文本表示。 每个扫描都在一行上编码，以换行符（\r\n）终止。 
-	 * 每一行中的值都以逗号分隔，并加上双引号。 值中的双引号以两个双引号的顺序进行转义。 输出的字段有：
+	 * 构建扫描历史记录的文本表示。 每个扫描都在一行上编码，以换行符（\r\n）终止。 每一行中的值都以逗号分隔，并加上双引号。
+	 * 值中的双引号以两个双引号的顺序进行转义。 输出的字段有：
 	 * </p>
 	 * 
 	 * <ol>
@@ -354,6 +362,7 @@ public final class HistoryManager {
 
 	/**
 	 * 保存历史
+	 * 
 	 * @param history
 	 * @return
 	 */
