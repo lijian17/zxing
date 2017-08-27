@@ -44,6 +44,7 @@ public final class CameraManager {
   private Rect framingRectInPreview;
   private boolean initialized;
   private boolean previewing;
+  /** 请求要打开的相机ID */
   private int requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
   private int requestedFramingRectWidth;
   private int requestedFramingRectHeight;
