@@ -34,8 +34,11 @@ public final class CameraManager {
   private static final int MAX_FRAME_HEIGHT = 675; // = 5/8 * 1080
 
   private final Context context;
+  /** 相机配置管理器 */
   private final CameraConfigurationManager configManager;
+  /** 一个打开的相机 */
   private OpenCamera camera;
+  /** 自动对焦管理器 */
   private AutoFocusManager autoFocusManager;
   private Rect framingRect;
   private Rect framingRectInPreview;
