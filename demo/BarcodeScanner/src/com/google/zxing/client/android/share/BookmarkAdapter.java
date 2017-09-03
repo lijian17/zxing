@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2011 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android.share;
 
 import java.util.List;
@@ -29,16 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * A custom adapter designed to fetch bookmarks from a cursor. Before Honeycomb we used
- * SimpleCursorAdapter, but it assumes the existence of an _id column, and the bookmark schema was
- * rewritten for HC without one. This caused the app to crash, hence this new class, which is
- * forwards and backwards compatible.
- *
- * @author dswitkin@google.com (Daniel Switkin)
+ * 一种定制的适配器，用于从光标中获取书签。在蜂窝我们使用SimpleCursorAdapter，但它假定一个_id柱的存在，和书签模式被改写为HC不一。这导致应用程序崩溃，因此这个新类是向前和向后兼容的。
+ * 
+ * @author lijian
+ * @date 2017-9-3 下午7:26:22
  */
 final class BookmarkAdapter extends BaseAdapter {
 
   private final Context context;
+  /** 标题链接集合 */
   private final List<String[]> titleURLs;
 
   BookmarkAdapter(Context context, List<String[]> titleURLs) {
@@ -71,7 +54,9 @@ final class BookmarkAdapter extends BaseAdapter {
       layout = factory.inflate(R.layout.bookmark_picker_list_item, viewGroup, false);
     }
     String[] titleURL = titleURLs.get(index);
+    // 标题
     ((TextView) layout.findViewById(R.id.bookmark_title)).setText(titleURL[0]);
+    // url地址
     ((TextView) layout.findViewById(R.id.bookmark_url)).setText(titleURL[1]);
     return layout;
   }
