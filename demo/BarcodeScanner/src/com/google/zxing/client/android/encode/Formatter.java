@@ -1,32 +1,19 @@
-/*
- * Copyright (C) 2011 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.google.zxing.client.android.encode;
 
 /**
- * Encapsulates some simple formatting logic, to aid refactoring in {@link ContactEncoder}.
- *
- * @author Sean Owen
+ * 封装一些简单的格式化逻辑，以帮助重构{@link ContactEncoder}
+ * 
+ * @author lijian
+ * @date 2017-9-3 下午10:42:55
  */
 interface Formatter {
 
   /**
-   * @param value value to format
-   * @param index index of value in a list of values to be formatted
-   * @return formatted value
+   * 格式化
+   * 
+   * @param value 值进行格式化
+   * @param index 要格式化的值列表中的值索引
+   * @return 格式化值
    */
   CharSequence format(CharSequence value, int index);
   
