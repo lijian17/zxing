@@ -35,10 +35,6 @@ import com.google.zxing.client.result.ResultParser;
  * @author lijian
  * @date 2017-9-1 下午6:17:33
  */
-/**
- * @author lijian
- * @date 2017-9-1 下午11:34:14
- */
 public abstract class ResultHandler {
 	private static final String TAG = ResultHandler.class.getSimpleName();
 
